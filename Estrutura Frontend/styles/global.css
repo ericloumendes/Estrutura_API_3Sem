@@ -5,9 +5,11 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #ff0000;
+    background-color: #e1ae65;
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100%;
   }
 
 @layer base {
