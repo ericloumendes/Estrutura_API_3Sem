@@ -7,7 +7,8 @@ import { z } from "zod"
  
 const formSchema = z.object({
   username: z.string().min(2).max(50),
-  password: z.string().min(2).max(50)
+  password: z.string().min(2).max(50),
+  rememberMe: z.boolean().default(false),
 })
 
 import {
@@ -37,6 +38,7 @@ export default function Home() {
         defaultValues: {
           username: "",
           password: "",
+          rememberMe: false,
         },
     })
      
@@ -86,11 +88,31 @@ export default function Home() {
                                     </FormItem>
                                 )}
                             />
+                            <FormField
+                                control={form.control}
+                                name="rememberMe"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <label className="inline-flex items-center">
+                                                <input type="checkbox" checked={field.value} onChange={field.onChange} onBlur={field.onBlur} name={field.name} ref={field.ref} className="form-checkbox h-4 w-4 text-blue-600" />
+                                                <span className="ml-2 text-sm text-gray-700">Remember me</span>
+                                            </label>
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
                         </form>
                     </Form>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="flex justify-between">
+                    {/* Botão de login */}
                     <Button onClick={() => router.push('/about')}>Log in</Button>
+                    <div className="flex flex-col">
+                        {/* Links para 'Esqueci minha senha' e 'Cadastro novo' */}
+                        <button className="text-sm text-blue-600 hover:underline" onClick={() => router.push('/forgot-password')}>Forgot password?</button>
+                        <button className="text-sm text-blue-600 hover:underline" onClick={() => router.push('/signup')}>Create a new account</button>
+                    </div>
                 </CardFooter>
             </Card>
         </div>
